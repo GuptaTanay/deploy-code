@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="row" style="margin-top: 100px;"></div>
+
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-8 text-center">
+            <img src="{% static 'rapidfire.png' %}" height="50px">
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center align-items-center" style="margin-top: 50px;">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Enter your mobile to get started
+                    </div>
+                </div>
+                {% if not otp_sent %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Mobile</label>
+                        <input type="number" class="form-control" name="mobile" maxlength="10" minlength="10">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn-success" onclick="sendOTP()" type="button">Send OTP</button>
+                    </div>
+                </div>
+                {% else %}
+                    <div class="card-body">
+                        <form action="" class="form" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="action" value="verify-otp" style="display: none;">
+                            <input type="text" name="player" value="{{ player_id }}" style="display: none;">
+                            <div class="form-group">
+                                <label for="">OTP</label>
+                                <input type="number" class="form-control" name="otp" maxlength="4" minlength="4" required>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn-success" type="submit">Verify OTP</button>&nbsp;&nbsp;
+                                <button class="btn-default" type="button" onclick="window.location='/'">Resend OTP</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                {% endif %}
+            </div>
+
+
+            {% if wrong %}
+                <div class="alert alert-danger" style="margin-top: 30px;">
+                <i class="fas fa-exclamation-circle"></i> The OTP you entered is incorrect. Please try again.
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block scoped_js %}
+    <script>
+        const sendOTP = () => {
+            const mobile = $("[name='mobile']").val();
+            if(!mobile){
+                alert("Please enter a valid mobile number.");
+                return;
+            }
+            if(mobile.length < 10 || mobile.length > 10){
+                alert("Mobile number should be of 10 digits.");
+                return;
+            }
+
+            $.post({
+                "url": "/api/v1/otp/",
+                "data": {
+                    "mobile": mobile
+                },
+                "success": function (response) {
+                    console.log(response);
+                    window.location = "/?otpsent=1" + "&playerId=" + response['playerId'];
+                }
+            })
+        }
+    </script>
+{% endblock %}

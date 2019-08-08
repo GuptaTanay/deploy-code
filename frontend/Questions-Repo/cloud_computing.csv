@@ -1,0 +1,20 @@
+" ________________ is a paradigm of distributed computing to provide the customers on-demand, utility based computing service. ",Cloud Computing  ,Remote Invocation,Remote Sensing,Private Computing
+Cloud providers provide cloud services to the cloud users.,TRUE,FALSE,,
+Which of the following is not a cloud stakeholder?,Clients,Cloud providers,End users,Cloud users
+These cloud services are of the form of utility computing i.e. the _________ uses these services pay-as-you-go model.,Cloud users,Clients,End users,Cloud providers
+Which of the following is not a type of cloud?,Protected,Public,Private,Hybrid
+"In this type of cloud, an organization rents cloud services from cloud providers on-demand basis.,",Public,Private,Protected,Hybrid
+"In this type of cloud, the cloud is composed of multiple internal or external cloud.",Hybrid,Public,Protected,Private
+_____________ enables the migration of the virtual image from one physical machine to another.,virtualization,visualization,migration,virtual transfer
+Most of the cloud architectures are built on this type of architecture.,grid,skeleton,linear,template
+Saas stands for?,Software as a service,System Software and services,Software as a system,System as a service
+"When you add a software stack, such as an operating system and applications to the service, the model shifts to _____ model.",SaaS,PaaS,IaaS,All of the mentioned
+Which of the following is most refined and restrictive service model ?,PaaS,CaaS,IaaS,All of the mentioned
+All cloud computing applications suffer from the inherent _______ that is intrinsic in their WAN connectivity.,latency,propagation,noise,All of the mentioned
+Cloud computing is a _______ system and it is necessarily unidirectional in nature.,stateless,stateful,reliable,4
+Which of the following is best known service model ?,All of the mentioned,IaaS,PaaS,SaaS
+What second programming language did Google add for App Engine development?,Java,Flash,C++,Visual Basic
+What facet of cloud computing helps to guard against downtime and determines costs?,Service-level agreements,Application programming interfaces,Virtual private networks,Bandwidth fees
+ Which of these is not a major type of cloud computing usage?,Hardware as a Service,Platform as a Service,Software as a Service,Infrastructure as a Service
+Cloud Services have a________ relationship with their customers.,One-to-many,One-to-one,Many-to-one,
+What is the name of Rackspace’s cloud service?,Cloud Servers,Cloud On-Demand,EC2,

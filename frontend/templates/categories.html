@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+
+
+        <div class="row" style="margin-top: 50px;">
+            <div class="col">
+                <ul class="nav nav-pills">
+                    {% for domain in domains %}
+                        <li class="nav-item" style="margin-right: 10px;">
+                            <a data-toggle="tab" style="font-size: 22px" href="#domain-{{ domain.id }}" class="nav-link {% if forloop.first %}active{% endif %}" href="#">{{ domain.domain|title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 50px;">
+            <div class="col">
+                <div class="tab-content">
+                    {% for domain in domains %}
+                        <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="domain-{{ domain.id }}">
+                            <div class="row">
+                                {% for category in categories %}
+                                    {% if category.domain.id == domain.id %}
+                                        <div class="col-4">
+                                            <div class="card card-default" style="margin-top: 20px;">
+                                                <div class="card-header">
+                                                    <div class="cart-title text-center" style="font-size: 20px; color: #006193;">
+                                                        {{ category.category|upper }}
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <p class="card-title text-center">{{ category.description }}</p>
+
+                                                    {% if category.get_top_players %}
+                                                    <h5>Leaderboard</h5>
+                                                    <table class="table table-condensed table-sm table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    Rank
+                                                                </th>
+                                                                <th>
+                                                                    Player
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for player in category.get_top_players %}
+                                                            <tr>
+                                                                <td>
+                                                                    <b>#  {{ forloop.counter }}</b>
+                                                                </td>
+                                                                <td>
+                                                                    {{ player.1.winner.username|default:"Captain Anonymous" }}
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+                                                    {% else %}
+                                                        <div class="alert alert-info">
+                                                            <i class="fa fa-info-circle"></i> This category has no top players yet. Be the first!
+                                                        </div>
+                                                    {% endif %}
+
+                                                    <div class="text-center" style="margin-top: 50px;">
+                                                        <button class="btn btn-primary" onclick="$('#gameType-{{ category.id }}').modal('show');">
+                                                            <i class="fas fa-arrow-right"></i>&nbsp;&nbsp;&nbsp;Select
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for category in categories %}
+    <div class="modal fade" id="gameType-{{ category.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Choose Game Type</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-success" style="width: 100%;" onclick="startGame('{{ category.id }}', 'single')">Play alone</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-success" style="width: 100%;" onclick="startGame('{{ category.id }}', 'double')">Match me with a player</button>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block scoped_js %}
+    <script>
+     function startGame(cat, mode){
+         const player_id = '{{ request.user.player.id }}';
+         console.log(player_id)
+         window.location = "/game/find/"+player_id+ "/?category="+cat+"&mode=" + mode;
+     }
+    </script>
+{% endblock %}

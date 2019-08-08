@@ -1,0 +1,15 @@
+What is the trend in software nowadays?,to bring computer more & more closer to user,to solve complex problems,to be task specific, to be versatile
+Example of a unsupervised feature map?,voice recognition,text recognition,image recognition,none of the mentioned
+What is charge at protoplasm in state of inactivity?,negative,positive,neutral,may be positive or negative
+What is generalization?,ability to learn a mapping function,ability to store a pattern, ability to recall a pattern, none of the mentioned
+ What is the feature that doesn’t belongs to pattern classification in feeddorward neural networks?,delta rule learning,two layers,recall is direct,non linear processing units
+The recalled output in pattern association problem depends on?,both input & design,design of network,nature of input-output,none of the mentioned
+What is true regarding backpropagation rule?, all of the mentioned, it is also called generalized delta rule,there is no feedback of signal at nay stage,error in output is propagated backwards only to determine weight updates
+Does backpropagaion learning is based on gradient descent along error surface?,yes,no,cannot be said,it depends on gradient descent but not error surface
+What is the nature of general feedback given in competitive neural networks?,self excitatory,self inhibitory,self excitatory or self inhibitory,none of the mentioned
+What is an instar?, receives inputs from all others,gives output to all others,may receive or give input or output to others,none of the mentioned
+ The update in weight vector in basic competitive learning can be represented by?,w(t + 1) = w(t) + del.w(t), w(t + 1) = w(t),w(t + 1) = w(t) – del.w(t),none of the mentioned
+What is the nature of weights in plain hebbian learning?,divergent,convergent,may be convergent or divergent,none of the mentioned
+What is the other name of feedback layer in competitive neural networks?,competitive layer, feedback layer, feedback layer,no such name exist
+ Generally how many kinds of pattern storage network exist?, 3,4,2,5
+Which action is faster pattern classification or adjustment of weights in neural nets?,pattern classification,adjustment of weights,equal," either of them can be fast, depending on conditions"

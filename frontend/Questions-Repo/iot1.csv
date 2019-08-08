@@ -1,0 +1,14 @@
+What is the role of Bigdata in smart grid architecture of IoT?,Store data,Manage data,Collect data,Security
+What is the role of Cloud in smart grid architecture of IoT?,Manage data,Store data,Collect data,Security
+What is the role of Gateway in smart grid architecture of IoT?,Collect data,Security,Manage data,Store data
+What is the role of Sensor in smart grid architecture of IoT?,Store data,Manage data,Collect data,Security
+IoT gateway must provide __________,Protocol abstraction,Data storage,Security with hardware,Simple and fast installation
+Which of the following is IoT device manageability?,Simple and fast installation,Protocol abstraction,Security with hardware,Data storage
+IoT security management includes ________,Security with hardware,Protocol abstraction,Simple and fast installation,Data storage
+IoT data scalability includes ________,Data storage,Protocol abstraction,Simple and fast installation,Security with hardware
+What is the example for smart grid edge device for utility?,Smart Meters,Smart Home,Smart Car,Smart Collage
+"According to the analysis on IoT application frame work, smart grid is divided into ________ layers.",3 layers,2layers,4 layers,5 layers
+Monitor target of the smart ________ includes sensor objects in the power link,Perception layer,Smart network layer,Smart Application layer,Data layer
+________ layer can be divided into the data access network and the core network.,Smart network layer,Perception layer,Smart Application layer,Data layer
+"In ________ layer, various application platforms are built as required by the services needs of smart grid.",Smart Application layer,Data layer,Smart network layer,Perception layer
+ICT stands for ________,Information and Communication Technology,Internet and Communication Technology,Internet and Communication of Things,Information and Communication of Things

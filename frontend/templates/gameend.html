@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+
+{% block scoped_css %}
+    <style>
+        #score{
+            font-size: 40px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-7">
+            {% if not view.get_game.playerB %}
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-12">
+                        <div class="card card-default">
+                            <div class="card-body text-center">
+                                <i class="fas fa-check-circle" style="font-size: 30px; color: green;"></i>
+                                <br>
+                                <br>
+                                <h3>{{ view.get_game.playerA.username }}</h3>
+                                <h5>Quiz Complete! 🎉</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <h5>{{ view.get_game.player_a_correct_answers }} / {{ view.get_game.number_of_questions_asked }} Questions answered correct. You scored <b id="score"><br>{{ view.get_game.player_a_score }}</b></h5>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                <h6 id="warning" style="color: #F00;"></h6>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                {% if view.get_game.playerB %}
+                <div class="row" style="margin-top: 50px;">
+                    <div class="col-6">
+                        <div class="card card-default">
+                            <div class="card-body text-center">
+                                <i class="fas fa-check-circle" style="font-size: 30px; color: green;"></i>
+                                <br>
+                                <br>
+                                <h3>{{ view.get_game.playerA.username }}</h3>
+                                <h5>Winner! 🎉</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5>{{ view.get_game.player_a_correct_answers }} / {{ view.get_game.number_of_questions_asked }} Questions answered correct. You scored <b id="score">{{ view.get_game.player_a_score }}</b>.</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card card-default">
+                            <div class="card-body text-center">
+                                <i class="fas fa-times" style="font-size: 30px; color: red;"></i>
+                                <br>
+                                <br>
+                                <h3>{{ view.get_game.playerB.username }}</h3>
+                                <h5>You lost ☹️</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5>{{ view.get_game.player_b_correct_answers }} / {{ view.get_game.number_of_questions_asked }} Questions answered correct. You scored <b id="score">{{ view.get_game.player_b_score }}</b>.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center" >
+                        <h6 id="warning" style="color: #F00;"></h6>
+                    </div>
+                </div>
+            </div>
+                {% endif %}
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col">
+                        <div class="card card-default">
+                            <div class="card-body text-center">
+                                <button class="btn btn-xs btn-success" onclick="window.location='/'">Start Another Game</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-default mt-3">
+                            <div class="card-header">
+                                <h3 class="card-title text-center">🏆 Top Players in {{ view.get_game.category|title }} 🏆</h3>
+                            </div>
+                            <div class="card-body">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for leader in leaderboard %}
+                                        <tr>
+                                            <td>
+                                             {% if forloop.first %} 🥇 {% endif %}
+                                             {% if forloop.counter == 2 %} 🥈 {% endif %}
+                                             {% if forloop.counter == 3 %} 🥉 {% endif %}
+                                                # <b>{{ forloop.counter }}</b>
+
+                                            </td>
+                                            <td>
+                                                {{ leader.1.username|title }}
+                                            </td>
+                                            <td>
+                                                {{ leader.0 }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <div class="col-5">
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-12">
+                        <div class="card card-default">
+                            <div class="card-body" style="background-color:rgba(0,0,0,0.03)">
+                                <h3 class="card-title text-center mb-0">Learning Resources</h3>
+                                <h4 class="card-title text-center mt-3" style="font-size: 18px; color: grey"> Want to learn more? Visit these links to enhance your knowledge</h4>
+                            </div>
+                        </div>
+                        {% if resources %}
+                            {%  for resource in resources  %}
+                            <div class="card card-default mt-3">
+                                <div class="card-body">
+                                    <h5><a href="{{ resource.url }}">{{ resource.title }}</a></h5>
+                                </div>
+                            </div>
+                            {%  endfor %}
+                        {% else %}
+
+                            <h1>Sorry no resources regarding this category...</h1>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+{% endblock %}
+
+
+{% block scoped_js %}
+    <script>
+        let warning = document.getElementById('warning');
+        let idleTimeBool = true;
+        let idleTime = 30;
+        $(document).ready(function () {
+            let idleInterval = setInterval(function () {
+                if(idleTimeBool){
+                    idleTime = idleTime - 1;
+                        warning.innerHTML = 'Logging you out in '+idleTime+' seconds';
+                        if (idleTime < 0 ) {
+                            clearInterval(idleInterval);
+                            window.location = '/logout';
+                        }
+                    }else{
+                    warning.style.display='none';
+                }
+            }, 1000);
+        });
+
+
+            $(this).mousemove(function (e) {
+                idleTimeBool = false;
+            });
+            $(this).keypress(function (e) {
+                idleTimeBool = false;
+            });
+
+
+
+    </script>
+{% endblock %}
